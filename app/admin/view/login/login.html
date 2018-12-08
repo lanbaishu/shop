@@ -1,0 +1,139 @@
+{include file='public/header'/}
+	<body class="login-layout Reg_log_style" id="loginstyle">
+		<div class="logintop">
+			<span>后台管理界面平台</span>
+			<ul>
+				<li>
+					<a href="#">返回首页</a>
+				</li>
+				<li>
+					<a href="#">帮助</a>
+				</li>
+				<li>
+					<a href="#">关于</a>
+				</li>
+			</ul>
+		</div>
+		<div class="loginbody">
+			<div class="login-container">
+				<div class="center"> <img src="__IMAGES__/logo.png" /></div>
+				<div class="space-6"></div>
+				<div class="position-relative">
+					<div id="login-box" class="login-box widget-box no-border visible">
+						<div class="login-main">
+							<!--皮肤选择-->
+						<div class="skin-section">
+							<a href="javascript:void(0)" class="skin-btn clickBombbox iconfont icon-pifushezhi" id="skin-btn"></a>
+							<div class="Bombbox">
+								<ul class="skin-list">
+									<li>
+										<a class="colorpick-btn" href="javascript:void(0)" data-val="black" id="default" style="background-color:#222A2D"></a>
+									</li>
+									<li>
+										<a class="colorpick-btn" href="javascript:void(0)" data-val="blue" style="background-color:#438EB9;"></a>
+									</li>
+									<li>
+										<a class="colorpick-btn" href="javascript:void(0)" data-val="green" style="background-color:#72B63F;"></a>
+									</li>
+									<li>
+										<a class="colorpick-btn" href="javascript:void(0)" data-val="gray" style="background-color:#067350;"></a>
+									</li>
+									<li>
+										<a class="colorpick-btn" href="javascript:void(0)" data-val="red" style="background-color:#FF6868;"></a>
+									</li>
+									<li>
+										<a class="colorpick-btn" href="javascript:void(0)" data-val="purple" style="background-color:#6F036B;"></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+							<div class="clearfix">
+								<div class="login_icon"><img src="__IMAGES__/login_img.png" /></div>
+								<form class="" style=" width:300px; float:right; margin-right:50px;" action="{:url('login/login')}" method="post" >
+									<h4 class="title_name"><img src="__IMAGES__/login_title.png" /></h4>
+									<fieldset>
+										<ul>
+											<li class="frame_style form_error"><label class="user_icon iconfont">&#xe620;</label><input name="admin_name" type="text" placeholder="用户名" id="username" value="{$Think.session.admin_pass.admin_name}"/></li>
+											<li class="frame_style form_error"><label class="password_icon iconfont">&#xe625;</label><input name="admin_pass" type="password" placeholder="密码" id="userpwd" value="{$Think.session.admin_pass.admin_pass}"/></li>
+										</ul>
+										<div class="space"></div>
+										<div class="clearfix">
+											<label class="inline">
+                                      <input type="checkbox" class="ace" value="1" name="rm_pass">
+                                      <span class="lbl">保存密码</span>
+                                  </label>
+											<button type="submit" class="login_btn" id="login_btn"> 登&nbsp;陆 </button>
+										</div>
+
+										<div class="space-4"></div>
+									</fieldset>
+								</form>
+							</div>
+							<div class="social-or-login center">
+								<span class="bigger-110">通知</span>
+							</div>
+							<div class="social-login ">
+								为了更好的体验性（兼容移动端），本网站系统不再对IE8（含IE8）以下浏览器支持，请见谅。
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="loginbm">版权所有 2016</div>
+	</body>
+</html>
+<script type="text/javascript">
+	//验证登录
+	$(document).ready(function() {	
+		$("input[type='text'],input[type='password']").blur(function() {
+			var $el = $(this);
+			var inputname=0;
+			var $parent = $el.parent();
+			$parent.attr('class', 'frame_style').removeClass(' form_error');
+			if($el.val() == '') {
+				var name=$el.attr("data-name");
+				$parent.attr('class', 'frame_style').addClass(' form_error form_prompt');
+				$parent.find('i').eq(inputname).html(name+"不能为空").addClass("prompt");
+			}
+		});
+		$("input[type='text'],input[type='password']").focus(function() {
+			var $el = $(this);
+			var $parent = $el.parent();
+			if($el.val() == '') {
+				$parent.attr('class', 'frame_style').addClass(' form_errors');
+			} else {
+				$parent.attr('class', 'frame_style').removeClass(' form_errors');
+			}
+		});
+	  $('#login_btn').on('click', function() {
+		var num = 0;
+		var str = "";
+		$("input[type$='text'],input[type$='password']").each(function(n) {
+			var $el = $(this);		
+			var inputname=0;
+			var $parent = $el.parent();
+			if($el.val() == "") {
+				var name=$el.attr("data-name");
+				$parent.attr('class', 'frame_style').addClass(' form_error form_prompt');
+                 $parent.find('i').eq(inputname).html(name+"不能为空").addClass("prompt");
+				num++;
+				return false;
+			}
+		});
+		if(num > 0) {
+			return false;
+		} else {
+			//ajax 判断用户名是否存在
+			location.href = "../admin/index.html";
+		}
+	});
+	})
+	//框架设置
+	$(function() {
+		$("#loginstyle").BKframe({
+               //必须保留否则无法进行皮肤更换，以及兼容移动端
+               
+		})
+	});
+</script>

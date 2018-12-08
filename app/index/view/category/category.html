@@ -1,0 +1,129 @@
+{include file='public/header'/}
+<!-- breadcrumbs -->
+	<div class="breadcrumbs">
+		<div class="container">
+			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+				<li><a href="index/index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>首页</a></li>
+				{foreach name='parentTree' item='v'}
+				<li class="active"><a href="{:url('category/index')}?cat_id={$v.cat_id}">{$v.catename}</a></li>
+				{/foreach}
+			</ol>
+		</div>
+	</div>
+	<div class="products">
+		<div class="container">
+			<div class="col-md-4 products-left">
+				<div class="filter-price animated wow slideInUp" data-wow-delay=".5s">
+					<h3>Filter By Price</h3>
+					<ul class="dropdown-menu1">
+							<li><a href="">								               
+							<div id="slider-range"></div>							
+							<input type="text" id="amount" style="border: 0" />
+							</a></li>	
+					</ul>
+						<script type='text/javascript'>//<![CDATA[ 
+						$(window).load(function(){
+						 $( "#slider-range" ).slider({
+								range: true,
+								min: 0,
+								max: 100000,
+								values: [ 10000, 60000 ],
+								slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+								}
+					 });
+					$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+
+						});//]]>
+						</script>
+						<script type="text/javascript" src="__JS__/jquery-ui.min.js"></script>
+					 <!---->
+				</div>
+				<div class="categories animated wow slideInUp" data-wow-delay=".5s">
+					<h3>栏目分类</h3>
+					<ul class="cate">
+						{foreach name='cateTree' item='v'}
+						<li>{:str_repeat('&nbsp',$v.lev)}<a href="{:url('category/index')}?cat_id={$v.cat_id}">{$v.catename}</a></li>
+						{/foreach}
+					</ul>
+				</div>
+				<div class="new-products animated wow slideInUp" data-wow-delay=".5s">
+					<h3>New Products</h3>
+					<div class="new-products-grids">
+						{foreach name='new_goods' item='v'}
+						<div class="new-products-grid">
+							<div class="new-products-grid-left">
+								<a href="../products/single.html"><img src="__IMAGES__/6.jpg" alt=" " class="img-responsive" /></a>
+							</div>
+							<div class="new-products-grid-right">
+								<h4><a href="../products/single.html">{$v.goods_name}</a></h4>
+								<div class="rating">
+									<div class="clearfix"> </div>
+								</div>
+								<div class="simpleCart_shelfItem new-products-grid-right-add-cart">
+									<p> <span class="item_price">{$v.shop_price}</span><a class="item_add" href="{:url('products/index')}?goods_id={$v.goods_id}">商品详情 </a></p>
+								</div>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						{/foreach}
+
+					</div>
+				</div>
+				<div class="men-position animated wow slideInUp" data-wow-delay=".5s">
+					<a href="../products/single.html"><img src="__IMAGES__/29.jpg" alt=" " class="img-responsive" /></a>
+					<div class="men-position-pos">
+						<h4>Summer collection</h4>
+						<h5><span>55%</span> Flat Discount</h5>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8 products-right">
+				<div class="products-right-grid">
+					<div class="products-right-grids animated wow slideInRight" data-wow-delay=".5s">
+
+
+						<div class="clearfix"> </div>
+					</div>
+					<div class="products-right-grids-position animated wow slideInRight" data-wow-delay=".5s">
+						<img src="__IMAGES__/28.jpg" alt=" " class="img-responsive" />
+						<div class="products-right-grids-position1">
+							<h4>2016 New Collection</h4>
+							<p>Temporibus autem quibusdam et aut officiis debitis aut rerum 
+								necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae 
+								non recusandae.</p>
+						</div>
+					</div>
+				</div>
+				<div class="products-right-grids-bottom">
+					{foreach name='goods' item='v'}
+					<div class="col-md-4 products-right-grids-bottom-grid">
+						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+							<div class="new-collections-grid1-image">
+								<a href="../products/single.html" class="product-image"><img src="__IMAGES__/30.jpg" alt=" " class="img-responsive"></a>
+								<div class="new-collections-grid1-image-pos products-right-grids-pos">
+									<a href="{:url('products/index')}?goods_id={$v.goods_id}">商品详情</a>
+								</div>
+								<div class="new-collections-grid1-right products-right-grids-pos-right">
+
+								</div>
+							</div>
+							<h4><a href="../products/single.html">{$v.goods_name}</a></h4>
+							<p>{$v.goods_brief}.</p>
+							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+								<p><i>￥{$v.market_price}</i> <span class="item_price">￥{$v.shop_price}</span><a class="item_add" href="{:url('products/index')}?goods_id={$v.goods_id}">商品详情 </a></p>
+							</div>
+						</div>
+					</div>
+					{/foreach}
+					</div>
+				</div>
+			<div style="text-align: center">{$goods->render()}</div>
+					<div class="clearfix"> </div>
+				</div>
+
+			</div>
+			<div class="clearfix"> </div>
+
+<!-- //breadcrumbs -->
+{include file='public/footer'/}

@@ -1,0 +1,78 @@
+{include file='public/header'/}
+
+	<body id="pagestyle" class="padding15">
+		<div class="Bombbox-info Tab-Module">
+			<ul class="tab_memu box">
+				<li class="boxbox-flex2">
+					<a href="javascript:void(0)" class="memu_title btn btn-border clickBombbox selected" data-id="0">基本设置</a>
+				</li>
+			</ul>
+			<div class="tab-box tabcontent">
+				<form action="{:url('system/update')}" method="post">
+				<div class="tab-conent prompt_style active">
+					<ul class="clearfix add_style">
+					    <li class="cell-item">
+						   <label class="cell-left label_name">网站名称:</label>
+						   <div class="cell-right"><input name="sys_name" type="text" class="col-xs-6 col-lg-12" value="{$system.sys_name}"></div>
+					    </li>
+					    <li class="cell-item">
+						   <label class="cell-left label_name">网站域名:</label>
+						   <div class="cell-right"><input name="sys_url" type="text" class="col-xs-6 col-lg-12" value="{$system.sys_url}"></div>
+					    </li>
+					    <li class="cell-item">
+						   <label class="cell-left label_name">关键词:</label>
+						   <div class="cell-right"><input name="key_words" type="text" placeholder="5个左右,8汉字以内,用英文,隔开" class="col-xs-6 col-lg-12" value="{$system.key_words}"></div>
+					    </li>
+					     <li class="cell-item">
+						   <label class="cell-left label_name">版权信息:</label>
+						   <div class="cell-right"><input name="copyright" type="text" placeholder="" class="col-xs-6 col-lg-12" value="{$system.copyright}"></div>
+					    </li>
+					     <li class="cell-item">
+						   <label class="cell-left label_name">备案号:</label>
+						   <div class="cell-right"><input name="sys_icp" type="text" placeholder="" class="col-xs-4 col-lg-12" value="{$system.sys_icp}"></div>
+					    </li>
+					     <li class="cell-item">
+						   <label class="cell-left label_name">屏蔽词:</label>
+						   <div class="cell-right"><textarea class="textarea col-xs-4 col-lg-12 height200" name="shield_words" >{$system.shield_words}</textarea></div>
+					    </li>
+					</ul>
+					<div class="buttonstyle">
+						<button  title="保存" class="btn padding10 bg-deep-blue" type="submit">保存</button>
+					</div>
+				</div>
+				</form>
+				<div class="tab-conent prompt_style ">
+
+				</div>
+				<div class="tab-conent prompt_style ">
+
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script>
+	//内页框架
+	$(function() {
+		$("#pagestyle").Hupage({
+			pagecontent:'.Bombbox-info',//自定义属性
+			tabcontent:'.tabcontent',
+			tabmemu:'.tab_memu',
+			scrollbar: function(e) {
+				e.niceScroll({
+					cursorcolor: "#dddddd",
+					cursoropacitymax: 1,
+					touchbehavior: false,
+					cursorwidth: "3px",
+					cursorborder: "0",
+					cursorborderradius: "3px",
+				});
+			},
+			expand: function(thisBox, settings) {
+				 $(settings.pagecontent).css({height:$(window).height()-30});
+				settings.scrollbar($(settings.tabcontent).css({height:$(window).height()-$(settings.tabmemu).outerHeight()-30}));
+			}
+		})
+	})
+</script>
